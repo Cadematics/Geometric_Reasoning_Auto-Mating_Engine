@@ -1,0 +1,55 @@
+{
+  "schema_version": "0.1",
+  "step_path": "/home/momo/Desktop/simo_S76_25/projects_25/atomic_machines_small_projects/geometry_cad_generator/geomate/PLATE.STEP",
+  "num_root_shapes": 1,
+  "parts": [
+    {
+      "part_id": "part_84bdc97e41_r0_s0",
+      "root_index": 0,
+      "solid_index": 0,
+      "num_faces": 10,
+      "faces": [
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_61982bc91795",
+          "key": "61982bc91795625047ce356ba608a076c68828c6"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_a30bfa3a75c2",
+          "key": "a30bfa3a75c258af803d0a5cea88043ef07cd25d"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_b34ed51f3644",
+          "key": "b34ed51f3644ad92bd3bb9188664ce03c9e9afc2"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_28e617248067",
+          "key": "28e61724806727156ac39cd0282a5d0fbc6376f5"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_e6eb184554cc",
+          "key": "e6eb184554cceb1e192ab9ff3d16b9beaf8723f6"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_faed64685a53",
+          "key": "faed64685a536ab9707587d463031f45c39d102b"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_698b6ed137f8",
+          "key": "698b6ed137f8024b5792d4cc417d94a7f978958f"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_881a21dc010c",
+          "key": "881a21dc010cfe47ed48d237ee0f4b381c4ef7d9"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_90ec38bbce10",
+          "key": "90ec38bbce10ce921b0e2f1906f3dbb55192c73d"
+        },
+        {
+          "face_id": "part_84bdc97e41_r0_s0_face_910cfd63516a",
+          "key": "910cfd63516a898c32ea863cadf25ba2514945bb"
+        }
+      ]
+    }
+  ]
+}

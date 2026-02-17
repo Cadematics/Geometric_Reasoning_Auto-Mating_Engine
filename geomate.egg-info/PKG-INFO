@@ -1,0 +1,7 @@
+Metadata-Version: 2.4
+Name: geomate
+Version: 0.1.0
+Summary: Rule-based geometric reasoning auto-mating engine (OpenCascade)
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.23

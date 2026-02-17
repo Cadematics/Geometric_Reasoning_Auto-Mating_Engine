@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geomate"
+version = "0.1.0"
+description = "Rule-based geometric reasoning auto-mating engine (OpenCascade)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.23"]
+
+[project.scripts]
+geomate = "geomate.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
