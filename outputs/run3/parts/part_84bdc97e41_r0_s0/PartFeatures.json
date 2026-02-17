@@ -1,0 +1,291 @@
+{
+  "schema_version": "0.1",
+  "part_id": "part_84bdc97e41_r0_s0",
+  "source": {
+    "step_path": "/home/momo/Desktop/simo_S76_25/projects_25/atomic_machines_small_projects/geometry_cad_generator/geomate/PLATE.STEP",
+    "solid_index": 0
+  },
+  "units": "mm",
+  "features": [
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_61982bc91795_cyl",
+      "type": "cylinder",
+      "face_id": "part_84bdc97e41_r0_s0_face_61982bc91795",
+      "tags": [
+        [
+          "shaft"
+        ]
+      ],
+      "geom": {
+        "axis_point": [
+          40.0,
+          -7.5,
+          0.0
+        ],
+        "axis_dir": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "radius": 4.999999999999997
+      },
+      "meta": {
+        "area": 235.61944901923437,
+        "centroid": [
+          36.816901138162095,
+          -4.806171518655983e-16,
+          -4.616099169574286e-16
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_a30bfa3a75c2_cyl",
+      "type": "cylinder",
+      "face_id": "part_84bdc97e41_r0_s0_face_a30bfa3a75c2",
+      "tags": [
+        [
+          "shaft"
+        ]
+      ],
+      "geom": {
+        "axis_point": [
+          -40.0,
+          -7.5,
+          0.0
+        ],
+        "axis_dir": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "radius": 4.999999999999997
+      },
+      "meta": {
+        "area": 235.61944901923437,
+        "centroid": [
+          -43.183098861837905,
+          -4.806171518655983e-16,
+          -4.2171127700996194e-16
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_b34ed51f3644_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_b34ed51f3644",
+      "tags": [],
+      "geom": {
+        "origin": [
+          60.00000000000001,
+          7.5,
+          19.999999999999993
+        ],
+        "normal": [
+          1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "meta": {
+        "area": 599.9999999999999,
+        "centroid": [
+          60.000000000000014,
+          3.5527136788005016e-16,
+          -7.521760991835436e-15
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_28e617248067_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_28e617248067",
+      "tags": [],
+      "geom": {
+        "origin": [
+          60.00000000000001,
+          7.5,
+          -20.000000000000007
+        ],
+        "normal": [
+          1.1564823173178715e-16,
+          -0.0,
+          1.0
+        ]
+      },
+      "meta": {
+        "area": 1800.0,
+        "centroid": [
+          7.688294445529209e-15,
+          1.7763568394002506e-16,
+          -20.0
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_e6eb184554cc_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_e6eb184554cc",
+      "tags": [],
+      "geom": {
+        "origin": [
+          -59.99999999999999,
+          7.5,
+          20.000000000000007
+        ],
+        "normal": [
+          1.0,
+          -0.0,
+          -0.0
+        ]
+      },
+      "meta": {
+        "area": 599.9999999999999,
+        "centroid": [
+          -59.999999999999986,
+          3.5527136788005016e-16,
+          6.689093723366568e-15
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_faed64685a53_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_faed64685a53",
+      "tags": [],
+      "geom": {
+        "origin": [
+          60.00000000000001,
+          7.5,
+          19.999999999999993
+        ],
+        "normal": [
+          1.1564823173178715e-16,
+          -0.0,
+          1.0
+        ]
+      },
+      "meta": {
+        "area": 1800.0,
+        "centroid": [
+          6.300515664747763e-15,
+          1.7763568394002506e-16,
+          20.0
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_698b6ed137f8_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_698b6ed137f8",
+      "tags": [],
+      "geom": {
+        "origin": [
+          0.0,
+          7.5,
+          0.0
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "meta": {
+        "area": 4642.920367320509,
+        "centroid": [
+          1.0202190172344021e-14,
+          7.500000000000001,
+          5.741587139332583e-16
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_881a21dc010c_plane",
+      "type": "plane",
+      "face_id": "part_84bdc97e41_r0_s0_face_881a21dc010c",
+      "tags": [],
+      "geom": {
+        "origin": [
+          0.0,
+          -7.5,
+          0.0
+        ],
+        "normal": [
+          0.0,
+          1.0,
+          0.0
+        ]
+      },
+      "meta": {
+        "area": 4642.920367320509,
+        "centroid": [
+          1.0202190172344021e-14,
+          -7.500000000000001,
+          5.741587139332587e-16
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_90ec38bbce10_cyl",
+      "type": "cylinder",
+      "face_id": "part_84bdc97e41_r0_s0_face_90ec38bbce10",
+      "tags": [
+        [
+          "shaft"
+        ]
+      ],
+      "geom": {
+        "axis_point": [
+          -40.0,
+          -7.5,
+          0.0
+        ],
+        "axis_dir": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "radius": 4.999999999999997
+      },
+      "meta": {
+        "area": 235.61944901923437,
+        "centroid": [
+          -36.816901138162095,
+          -2.8271597168564605e-17,
+          9.107298248878238e-17
+        ]
+      }
+    },
+    {
+      "feature_id": "part_84bdc97e41_r0_s0_face_910cfd63516a_cyl",
+      "type": "cylinder",
+      "face_id": "part_84bdc97e41_r0_s0_face_910cfd63516a",
+      "tags": [
+        [
+          "shaft"
+        ]
+      ],
+      "geom": {
+        "axis_point": [
+          40.0,
+          -7.5,
+          0.0
+        ],
+        "axis_dir": [
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        "radius": 4.999999999999997
+      },
+      "meta": {
+        "area": 235.61944901923437,
+        "centroid": [
+          43.183098861837905,
+          -2.8271597168564605e-17,
+          -1.994931997373343e-17
+        ]
+      }
+    }
+  ]
+}
