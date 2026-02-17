@@ -47,8 +47,18 @@ def cmd_import(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_extract_features(_: argparse.Namespace) -> int:
-    raise SystemExit("extract_features not implemented yet (Phase 2).")
+def cmd_extract_features(args: argparse.Namespace) -> int:
+    from pathlib import Path
+    from geomate.features.extract import extract_all
+
+    step_path = Path(args.step)
+    out_dir = Path(args.out)
+
+    written = extract_all(step_path, out_dir)
+    print(f"Wrote {len(written)} PartFeatures.json files under: {out_dir}")
+    for p in written:
+        print(f" - {p}")
+    return 0
 
 
 def cmd_propose_mates(_: argparse.Namespace) -> int:
@@ -73,6 +83,8 @@ def build_parser() -> argparse.ArgumentParser:
     p_imp.set_defaults(func=cmd_import)
 
     p_ext = sub.add_parser("extract_features", help="Extract plane/cylinder features per part (Phase 2)")
+    p_ext.add_argument("--step", required=True, help="Path to STEP file")
+    p_ext.add_argument("--out", default="outputs", help="Output directory")
     p_ext.set_defaults(func=cmd_extract_features)
 
     p_mat = sub.add_parser("propose_mates", help="Generate candidate mates (Phase 3/4)")
