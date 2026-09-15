@@ -4,7 +4,11 @@ import pytest
 
 from auto_mating.io import read_step
 from auto_mating.topology import iter_faces
-from auto_mating.geometry import describe_face, plane_geometry
+from auto_mating.geometry import (
+    cylinder_geometry,
+    describe_face,
+    plane_geometry,
+)
 
 EXAMPLE_STEP = (
     Path(__file__).parent.parent
@@ -13,6 +17,13 @@ EXAMPLE_STEP = (
     / "plate.step"
 )
 
+
+CYLINDER_STEP = (
+    Path(__file__).parent.parent
+    / "examples"
+    / "simple_plate"
+    / "plate_with_hole.step"
+)
 
 def test_simple_plate_face_descriptors():
     shape = read_step(EXAMPLE_STEP)
@@ -164,3 +175,41 @@ def test_simple_plate_plane_geometry():
 
     for actual, expected in zip(directions, expected_directions):
         assert actual == pytest.approx(expected)
+
+
+
+
+
+def test_cylinder_geometry():
+    shape = read_step(CYLINDER_STEP)
+    faces = list(iter_faces(shape))
+
+    geometry = cylinder_geometry(faces[0])
+
+    assert geometry.radius == pytest.approx(
+        2.8016117336637
+    )
+
+    assert (
+        geometry.axis_origin.x,
+        geometry.axis_origin.y,
+        geometry.axis_origin.z,
+    ) == pytest.approx(
+        (
+            11.7627650614774,
+            8.46492835271788,
+            0.0,
+        )
+    )
+
+    assert (
+        geometry.axis_direction.x,
+        geometry.axis_direction.y,
+        geometry.axis_direction.z,
+    ) == pytest.approx(
+        (
+            0.0,
+            0.0,
+            1.0,
+        )
+    )

@@ -24,6 +24,14 @@ class PlaneGeometry:
 
 
 @dataclass(frozen=True)
+class CylinderGeometry:
+    axis_origin: Point3D
+    axis_direction: Vector3D
+    radius: float
+
+    
+
+@dataclass(frozen=True)
 class FaceDescriptor:
     index: int
     surface_type: SurfaceType

@@ -7,8 +7,14 @@ from OCCT.GProp import GProp_GProps
 from OCCT.TopoDS import TopoDS_Face
 
 from .classification import classify_face
-from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D
 
+from .model import (
+    CylinderGeometry,
+    FaceDescriptor,
+    PlaneGeometry,
+    Point3D,
+    Vector3D,
+)
 
 def plane_geometry(face: TopoDS_Face) -> PlaneGeometry:
     """
@@ -138,4 +144,32 @@ def describe_face(
         centroid=face_centroid(face),
         normal=face_normal(face),
 
+    )
+
+
+
+def cylinder_geometry(face: TopoDS_Face) -> CylinderGeometry:
+    """
+    Extract the underlying infinite cylinder geometry of a
+    cylindrical face.
+    """
+    surface = BRepAdaptor_Surface(face)
+    cylinder = surface.Cylinder()
+
+    axis = cylinder.Axis()
+    location = axis.Location()
+    direction = axis.Direction()
+
+    return CylinderGeometry(
+        axis_origin=Point3D(
+            x=location.X(),
+            y=location.Y(),
+            z=location.Z(),
+        ),
+        axis_direction=Vector3D(
+            x=direction.X(),
+            y=direction.Y(),
+            z=direction.Z(),
+        ),
+        radius=cylinder.Radius(),
     )

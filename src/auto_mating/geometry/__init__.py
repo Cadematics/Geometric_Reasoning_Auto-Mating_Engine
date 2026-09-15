@@ -1,5 +1,6 @@
 from .classification import classify_face
 from .descriptors import (
+    cylinder_geometry,
     describe_face,
     face_area,
     face_centroid,
@@ -19,4 +20,11 @@ __all__ = [
     "face_centroid",
     "face_normal",
     "describe_face",
+    "plane_geometry",
+    "CylinderGeometry",
+    "cylinder_geometry",
+
 ]
+
+
+
