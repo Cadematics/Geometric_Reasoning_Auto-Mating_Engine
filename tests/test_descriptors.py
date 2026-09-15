@@ -44,3 +44,69 @@ def test_simple_plate_face_descriptors():
         5000.0,
         5000.0,
     ])
+
+
+def test_simple_plate_face_centroids():
+    shape = read_step(EXAMPLE_STEP)
+    faces = list(iter_faces(shape))
+
+    descriptors = [
+        describe_face(face, index)
+        for index, face in enumerate(faces)
+    ]
+
+    centroids = [
+        (
+            descriptor.centroid.x,
+            descriptor.centroid.y,
+            descriptor.centroid.z,
+        )
+        for descriptor in descriptors
+    ]
+
+    expected = [
+        (0.0, 25.0, 5.0),
+        (100.0, 25.0, 5.0),
+        (50.0, 0.0, 5.0),
+        (50.0, 50.0, 5.0),
+        (50.0, 25.0, 0.0),
+        (50.0, 25.0, 10.0),
+    ]
+
+    for actual, expected_point in zip(centroids, expected):
+        assert actual == pytest.approx(expected_point)
+
+
+
+
+
+
+def test_simple_plate_face_normals():
+    shape = read_step(EXAMPLE_STEP)
+    faces = list(iter_faces(shape))
+
+    descriptors = [
+        describe_face(face, index)
+        for index, face in enumerate(faces)
+    ]
+
+    normals = [
+        (
+            descriptor.normal.x,
+            descriptor.normal.y,
+            descriptor.normal.z,
+        )
+        for descriptor in descriptors
+    ]
+
+    expected = [
+        (-1.0, 0.0, 0.0),
+        (1.0, 0.0, 0.0),
+        (0.0, -1.0, 0.0),
+        (0.0, 1.0, 0.0),
+        (0.0, 0.0, -1.0),
+        (0.0, 0.0, 1.0),
+    ]
+
+    for actual, expected_normal in zip(normals, expected):
+        assert actual == pytest.approx(expected_normal)

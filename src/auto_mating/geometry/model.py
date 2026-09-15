@@ -1,7 +1,20 @@
 from dataclasses import dataclass
-from typing import Tuple
 
 from .surfaces import SurfaceType
+
+
+@dataclass(frozen=True)
+class Point3D:
+    x: float
+    y: float
+    z: float
+
+
+@dataclass(frozen=True)
+class Vector3D:
+    x: float
+    y: float
+    z: float
 
 
 @dataclass(frozen=True)
@@ -9,12 +22,5 @@ class FaceDescriptor:
     index: int
     surface_type: SurfaceType
     area: float
-
-
-
-
-
-
-
-
-
+    centroid: Point3D
+    normal: Vector3D
