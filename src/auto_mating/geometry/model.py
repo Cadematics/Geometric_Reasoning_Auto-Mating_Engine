@@ -18,6 +18,12 @@ class Vector3D:
 
 
 @dataclass(frozen=True)
+class PlaneGeometry:
+    origin: Point3D
+    axis_direction: Vector3D
+
+
+@dataclass(frozen=True)
 class FaceDescriptor:
     index: int
     surface_type: SurfaceType

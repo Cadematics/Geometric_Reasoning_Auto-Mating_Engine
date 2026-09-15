@@ -7,9 +7,44 @@ from OCCT.GProp import GProp_GProps
 from OCCT.TopoDS import TopoDS_Face
 
 from .classification import classify_face
-from .model import FaceDescriptor, Point3D, Vector3D
+from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D
 
 
+def plane_geometry(face: TopoDS_Face) -> PlaneGeometry:
+    """
+    Extract the underlying infinite plane geometry of a planar face.
+    """
+    surface = BRepAdaptor_Surface(face)
+    plane = surface.Plane()
+
+    location = plane.Location()
+
+    direction = plane.Axis().Direction()
+
+    # return PlaneGeometry(
+    #     origin=Point3D(
+    #         x=location.X(),
+    #         y=location.Y(),
+    #         z=location.Z(),
+    #     ),
+    #     normal=Vector3D(
+    #         x=direction.X(),
+    #         y=direction.Y(),
+    #         z=direction.Z(),
+    #     ),
+    # )
+    return PlaneGeometry(
+    origin=Point3D(
+        x=location.X(),
+        y=location.Y(),
+        z=location.Z(),
+    ),
+    axis_direction=Vector3D(
+        x=direction.X(),
+        y=direction.Y(),
+        z=direction.Z(),
+    ),
+)
 
 
 def face_area(face: TopoDS_Face) -> float:

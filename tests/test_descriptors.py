@@ -2,10 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from auto_mating.geometry import describe_face
 from auto_mating.io import read_step
 from auto_mating.topology import iter_faces
-
+from auto_mating.geometry import describe_face, plane_geometry
 
 EXAMPLE_STEP = (
     Path(__file__).parent.parent
@@ -110,3 +109,58 @@ def test_simple_plate_face_normals():
 
     for actual, expected_normal in zip(normals, expected):
         assert actual == pytest.approx(expected_normal)
+
+
+
+
+
+def test_simple_plate_plane_geometry():
+    shape = read_step(EXAMPLE_STEP)
+    faces = list(iter_faces(shape))
+
+    geometries = [
+        plane_geometry(face)
+        for face in faces
+    ]
+
+    origins = [
+        (
+            geometry.origin.x,
+            geometry.origin.y,
+            geometry.origin.z,
+        )
+        for geometry in geometries
+    ]
+
+    directions = [
+        (
+            geometry.axis_direction.x,
+            geometry.axis_direction.y,
+            geometry.axis_direction.z,
+        )
+        for geometry in geometries
+    ]
+
+    expected_origins = [
+        (0.0, 0.0, 0.0),
+        (100.0, 0.0, 0.0),
+        (0.0, 0.0, 0.0),
+        (0.0, 50.0, 0.0),
+        (0.0, 0.0, 0.0),
+        (0.0, 0.0, 10.0),
+    ]
+
+    expected_directions = [
+        (1.0, 0.0, 0.0),
+        (1.0, 0.0, 0.0),
+        (0.0, 1.0, 0.0),
+        (0.0, 1.0, 0.0),
+        (0.0, 0.0, 1.0),
+        (0.0, 0.0, 1.0),
+    ]
+
+    for actual, expected in zip(origins, expected_origins):
+        assert actual == pytest.approx(expected)
+
+    for actual, expected in zip(directions, expected_directions):
+        assert actual == pytest.approx(expected)
