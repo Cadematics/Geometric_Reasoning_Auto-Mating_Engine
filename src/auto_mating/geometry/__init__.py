@@ -7,22 +7,24 @@ from .descriptors import (
     face_normal,
     plane_geometry,
 )
-from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D
+from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D, CylinderGeometry
 from .surfaces import SurfaceType
 
 __all__ = [
     "SurfaceType",
     "Point3D",
     "Vector3D",
+    "PlaneGeometry",
+    "cylinder_geometry",
     "FaceDescriptor",
     "classify_face",
     "face_area",
     "face_centroid",
     "face_normal",
-    "describe_face",
     "plane_geometry",
+    "describe_face",
     "CylinderGeometry",
-    "cylinder_geometry",
+
 
 ]
 

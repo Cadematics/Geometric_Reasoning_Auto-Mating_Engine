@@ -1,12 +1,15 @@
-from auto_mating.geometry import Vector3D
+from auto_mating.geometry import Vector3D, CylinderGeometry, PlaneGeometry, Point3D, FaceDescriptor, SurfaceType
 from auto_mating.reasoning import (
     are_opposite_direction,
     are_parallel,
     are_same_direction,
     dot,
+    are_mating_planes,
+    compare_planes,
+    planar_mating_candidate,
 )
-from auto_mating.geometry import PlaneGeometry, Point3D, Vector3D
-from auto_mating.reasoning import compare_planes
+from auto_mating.geometry import PlaneGeometry, Point3D, Vector3D, FaceDescriptor
+from auto_mating.reasoning import compare_planes, planar_mating_candidate   
 
 
 
@@ -98,4 +101,187 @@ def test_parallel_separated_planes():
     assert not relationship.opposite_direction
     assert relationship.distance == 10.0
     assert not relationship.coplanar
+
+
+
+
+def test_mating_planes_within_tolerance():
+    plane_a = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.0),
+        axis_direction=Vector3D(0.0, 0.0, 1.0),
+    )
+
+    plane_b = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.001),
+        axis_direction=Vector3D(0.0, 0.0, -1.0),
+    )
+
+    assert are_mating_planes(
+        plane_a,
+        plane_b,
+        distance_tolerance=0.01,
+    )
+
+
+def test_mating_planes_too_far_apart():
+    plane_a = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.0),
+        axis_direction=Vector3D(0.0, 0.0, 1.0),
+    )
+
+    plane_b = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 10.0),
+        axis_direction=Vector3D(0.0, 0.0, -1.0),
+    )
+
+    assert not are_mating_planes(
+        plane_a,
+        plane_b,
+        distance_tolerance=0.01,
+    )
+
+
+def test_same_direction_planes_are_not_mating():
+    plane_a = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.0),
+        axis_direction=Vector3D(0.0, 0.0, 1.0),
+    )
+
+    plane_b = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.001),
+        axis_direction=Vector3D(0.0, 0.0, 1.0),
+    )
+
+    assert not are_mating_planes(
+        plane_a,
+        plane_b,
+        distance_tolerance=0.01,
+    )
+
+
+def test_non_parallel_planes_are_not_mating():
+    plane_a = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.0),
+        axis_direction=Vector3D(0.0, 0.0, 1.0),
+    )
+
+    plane_b = PlaneGeometry(
+        origin=Point3D(0.0, 0.0, 0.0),
+        axis_direction=Vector3D(1.0, 0.0, 0.0),
+    )
+
+    assert not are_mating_planes(
+        plane_a,
+        plane_b,
+        distance_tolerance=0.01,
+    )
+
+
+
+
+
+def test_planar_faces_can_be_mating_candidates():
+    face_a = FaceDescriptor(
+        index=1,
+        surface_type=SurfaceType.PLANE,
+        area=100.0,
+        centroid=Point3D(5.0, 5.0, 0.0),
+        normal=Vector3D(0.0, 0.0, 1.0),
+        plane=PlaneGeometry(
+            origin=Point3D(0.0, 0.0, 0.0),
+            axis_direction=Vector3D(0.0, 0.0, 1.0),
+        ),
+    )
+
+    face_b = FaceDescriptor(
+        index=2,
+        surface_type=SurfaceType.PLANE,
+        area=100.0,
+        centroid=Point3D(5.0, 5.0, 0.001),
+        normal=Vector3D(0.0, 0.0, -1.0),
+        plane=PlaneGeometry(
+            origin=Point3D(0.0, 0.0, 0.001),
+            axis_direction=Vector3D(0.0, 0.0, -1.0),
+        ),
+    )
+
+    assert planar_mating_candidate(
+        face_a,
+        face_b,
+        distance_tolerance=0.01,
+    )
+
+def test_non_planar_face_is_not_a_planar_mating_candidate():
+    face_a = FaceDescriptor(
+        index=1,
+        surface_type=SurfaceType.CYLINDER,
+        area=100.0,
+        centroid=Point3D(0.0, 0.0, 0.0),
+        normal=Vector3D(1.0, 0.0, 0.0),
+        cylinder=CylinderGeometry(
+            axis_origin=Point3D(0.0, 0.0, 0.0),
+            axis_direction=Vector3D(0.0, 0.0, 1.0),
+            radius=5.0,
+        ),
+    )
+
+    face_b = FaceDescriptor(
+        index=2,
+        surface_type=SurfaceType.PLANE,
+        area=100.0,
+        centroid=Point3D(0.0, 0.0, 0.0),
+        normal=Vector3D(0.0, 0.0, -1.0),
+        plane=PlaneGeometry(
+            origin=Point3D(0.0, 0.0, 0.0),
+            axis_direction=Vector3D(0.0, 0.0, -1.0),
+        ),
+    )
+
+    assert not planar_mating_candidate(face_a, face_b)
+
+def test_planar_faces_with_same_direction_are_not_mating():
+    face_a = FaceDescriptor(
+        index=1,
+        surface_type=SurfaceType.PLANE,
+        area=100.0,
+        centroid=Point3D(5.0, 5.0, 0.0),
+        normal=Vector3D(0.0, 0.0, 1.0),
+        plane=PlaneGeometry(
+            origin=Point3D(0.0, 0.0, 0.0),
+            axis_direction=Vector3D(0.0, 0.0, 1.0),
+        ),
+    )
+
+    face_b = FaceDescriptor(
+        index=2,
+        surface_type=SurfaceType.PLANE,
+        area=100.0,
+        centroid=Point3D(5.0, 5.0, 0.001),
+        normal=Vector3D(0.0, 0.0, 1.0),
+        plane=PlaneGeometry(
+            origin=Point3D(0.0, 0.0, 0.001),
+            axis_direction=Vector3D(0.0, 0.0, 1.0),
+        ),
+    )
+
+    assert not planar_mating_candidate(
+        face_a,
+        face_b,
+        distance_tolerance=0.01,
+    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,7 +1,7 @@
 from math import isclose
 
 from auto_mating.geometry import Vector3D
-from auto_mating.geometry import PlaneGeometry, Point3D
+from auto_mating.geometry import PlaneGeometry, Point3D, FaceDescriptor
 from .model import PlanarRelationship
 
 
@@ -125,6 +125,82 @@ def compare_planes(
         distance=distance,
         coplanar=coplanar,
     )
+
+
+
+def are_mating_planes(
+    a: PlaneGeometry,
+    b: PlaneGeometry,
+    distance_tolerance: float = 1.0e-6,
+    angular_tolerance: float = 1.0e-6,
+) -> bool:
+    """
+    Determine whether two planar surfaces are candidate mating planes.
+
+    Candidate mating planes must:
+    - be parallel,
+    - have opposite directions,
+    - be separated by no more than distance_tolerance.
+
+    This compares the underlying infinite planes. It does not yet
+    verify whether the bounded face regions actually overlap.
+    """
+    relationship = compare_planes(
+        a,
+        b,
+        tolerance=angular_tolerance,
+    )
+
+    if not relationship.parallel:
+        return False
+
+    if not relationship.opposite_direction:
+        return False
+
+    return relationship.distance <= distance_tolerance
+
+
+
+def planar_mating_candidate(
+    a: FaceDescriptor,
+    b: FaceDescriptor,
+    distance_tolerance: float = 1.0e-6,
+    angular_tolerance: float = 1.0e-6,
+) -> bool:
+    """
+    Determine whether two planar faces are candidate mating faces.
+
+    Both faces must:
+    - be planar,
+    - have extracted plane geometry,
+    - have opposite-facing plane directions,
+    - be within the specified distance tolerance.
+
+    This is still a candidate test. It does not yet verify
+    overlap between the bounded face regions.
+    """
+    if a.plane is None or b.plane is None:
+        return False
+
+    if a.surface_type.value != "plane":
+        return False
+
+    if b.surface_type.value != "plane":
+        return False
+
+    return are_mating_planes(
+        a.plane,
+        b.plane,
+        distance_tolerance=distance_tolerance,
+        angular_tolerance=angular_tolerance,
+    )
+
+
+
+
+
+
+
 
 
 
