@@ -112,6 +112,39 @@ class TopologyIndex:
 
         return tuple(faces)
 
+    def face_adjacency(self):
+        """ 
+        Build the face adjacency graph.
+
+        Two faces are adjacent when they share a topological edge.
+        """
+        adjacency = {
+            face_index: set()
+            for face_index in range(1, self.face_count + 1)
+        }
+
+        for edge_index in range(1, self.edge_count + 1):
+            faces = self.edge_faces(edge_index)
+
+            for i in range(len(faces)):
+                for j in range(i + 1, len(faces)):
+                    face_a = faces[i]
+                    face_b = faces[j]
+
+                    adjacency[face_a].add(face_b)
+                    adjacency[face_b].add(face_a)
+
+        return {
+            face_index: tuple(sorted(neighbors))
+            for face_index, neighbors in adjacency.items()
+        }
+
+
+
+
+
+
+
 
 
     
