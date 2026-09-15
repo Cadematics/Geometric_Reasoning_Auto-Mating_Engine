@@ -1,6 +1,9 @@
 from dataclasses import dataclass
-
 from .surfaces import SurfaceType
+
+from typing import Optional
+
+
 
 
 @dataclass(frozen=True)
@@ -38,3 +41,9 @@ class FaceDescriptor:
     area: float
     centroid: Point3D
     normal: Vector3D
+    # plane: PlaneGeometry | None = None
+    # cylinder: CylinderGeometry | None = None
+    plane: Optional[PlaneGeometry] = None
+    cylinder: Optional[CylinderGeometry] = None
+
+

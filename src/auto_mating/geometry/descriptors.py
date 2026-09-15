@@ -8,6 +8,8 @@ from OCCT.TopoDS import TopoDS_Face
 
 from .classification import classify_face
 
+from .surfaces import SurfaceType
+
 from .model import (
     CylinderGeometry,
     FaceDescriptor,
@@ -135,15 +137,27 @@ def describe_face(
     index: int,
 ) -> FaceDescriptor:
     """
-    Extract the initial geometric descriptor for a face.
+    Extract the geometric descriptor for a face.
     """
+    surface_type = classify_face(face)
+
+    plane = None
+    cylinder = None
+
+    if surface_type == SurfaceType.PLANE:
+        plane = plane_geometry(face)
+
+    elif surface_type == SurfaceType.CYLINDER:
+        cylinder = cylinder_geometry(face)
+
     return FaceDescriptor(
         index=index,
-        surface_type=classify_face(face),
+        surface_type=surface_type,
         area=face_area(face),
         centroid=face_centroid(face),
         normal=face_normal(face),
-
+        plane=plane,
+        cylinder=cylinder,
     )
 
 
