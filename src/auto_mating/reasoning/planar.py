@@ -173,8 +173,12 @@ def planar_mating_candidate(
     Both faces must:
     - be planar,
     - have extracted plane geometry,
-    - have opposite-facing plane directions,
+    - lie on parallel planes,
+    - have opposite B-rep face normals,
     - be within the specified distance tolerance.
+
+    The plane relationship uses the underlying infinite planes.
+    Face orientation is determined from the B-rep face normals.
 
     This is still a candidate test. It does not yet verify
     overlap between the bounded face regions.
@@ -188,14 +192,23 @@ def planar_mating_candidate(
     if b.surface_type.value != "plane":
         return False
 
-    return are_mating_planes(
+    relationship = compare_planes(
         a.plane,
         b.plane,
-        distance_tolerance=distance_tolerance,
-        angular_tolerance=angular_tolerance,
+        tolerance=angular_tolerance,
     )
 
+    if not relationship.parallel:
+        return False
 
+    if relationship.distance > distance_tolerance:
+        return False
+
+    return are_opposite_direction(
+        a.normal,
+        b.normal,
+        tolerance=angular_tolerance,
+    )
 
 
 
