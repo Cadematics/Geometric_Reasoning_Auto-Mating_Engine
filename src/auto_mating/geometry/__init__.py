@@ -19,6 +19,11 @@ from .planar import (
     project_point,
 )
 
+from .boundaries import (
+    face_boundary_points,
+    project_face_boundary,
+)
+
 from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D, CylinderGeometry
 from .surfaces import SurfaceType
 
