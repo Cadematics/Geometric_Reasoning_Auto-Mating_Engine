@@ -1,7 +1,7 @@
 from math import isclose
 
 from auto_mating.geometry import Vector3D
-from auto_mating.geometry import PlaneGeometry, Point3D, FaceDescriptor
+from auto_mating.geometry import PlaneGeometry, Point3D, FaceDescriptor, SurfaceType
 from .model import PlanarRelationship
 
 
@@ -177,19 +177,20 @@ def planar_mating_candidate(
     - have opposite B-rep face normals,
     - be within the specified distance tolerance.
 
-    The plane relationship uses the underlying infinite planes.
-    Face orientation is determined from the B-rep face normals.
+    The plane geometry is used for the geometric plane relationship,
+    while the oriented face normal is used to determine whether the
+    actual B-rep faces face each other.
 
-    This is still a candidate test. It does not yet verify
-    overlap between the bounded face regions.
+    This is still a candidate test. It does not yet verify whether
+    the bounded face regions actually overlap.
     """
     if a.plane is None or b.plane is None:
         return False
 
-    if a.surface_type.value != "plane":
+    if a.surface_type != SurfaceType.PLANE:
         return False
 
-    if b.surface_type.value != "plane":
+    if b.surface_type != SurfaceType.PLANE:
         return False
 
     relationship = compare_planes(
@@ -209,7 +210,6 @@ def planar_mating_candidate(
         b.normal,
         tolerance=angular_tolerance,
     )
-
 
 
 

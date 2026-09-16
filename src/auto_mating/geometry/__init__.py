@@ -7,6 +7,18 @@ from .descriptors import (
     face_normal,
     plane_geometry,
 )
+
+from .planar import (
+    PlanarFrame,
+    Point2D,
+    cross,
+    dot,
+    make_planar_frame,
+    norm,
+    normalize,
+    project_point,
+)
+
 from .model import FaceDescriptor, PlaneGeometry, Point3D, Vector3D, CylinderGeometry
 from .surfaces import SurfaceType
 
@@ -24,6 +36,14 @@ __all__ = [
     "plane_geometry",
     "describe_face",
     "CylinderGeometry",
+    "Point2D",
+    "PlanarFrame",
+    "make_planar_frame",
+    "project_point",
+    "norm",
+    "normalize",
+    "dot",
+    "cross",
 
 
 ]
